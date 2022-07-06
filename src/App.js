@@ -7,13 +7,15 @@ import NotFound from "./pages/NotFound";
 
 export default function App() {
 	return (
-		<Routes>
-			<Route path="/">
-				<Route index element={<Home />} />
-				<Route path="/login" element={<Login />} />
-				<Route path="/register" element={<Register />} />
-				<Route path="*" element={<NotFound />} />
-			</Route>
-		</Routes>
+		<div className="app">
+			<Routes>
+				<Route path="/">
+					<Route index element={<Home />} />
+					<Route path="/login" element={<Login />} />
+					<Route path="/register" element={<Register />} />
+					<Route path="*" element={<NotFound />} />
+				</Route>
+			</Routes>
+		</div>
 	);
 }
