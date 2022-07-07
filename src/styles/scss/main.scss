@@ -112,8 +112,25 @@ $form-check-label-cursor: pointer;
 $form-check-label-color: $secondary;
 $form-check-input-focus-border: $input-focus-border-color;
 
+// Custom Form Validation
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/bootstrap/scss/variables";
+
+$form-validation-states: (
+	"valid": (
+		"color": $form-feedback-valid-color,
+		"icon": $form-feedback-icon-valid,
+		"focus-box-shadow": $input-btn-focus-box-shadow,
+	),
+	"invalid": (
+		"color": $form-feedback-invalid-color,
+		"icon": $form-feedback-icon-invalid,
+		"focus-box-shadow": $input-btn-focus-box-shadow,
+	),
+);
+
 // Custom background-image login
-.login {
+.background-form {
 	background-image: linear-gradient(rgba(255, 82, 27, 0.8), rgba(255, 82, 27, 0.8)),
 		url("../../images/background-login.jpg");
 	background-repeat: no-repeat;
