@@ -20,8 +20,8 @@ export default function Register() {
 
 	return (
 		<Container fluid className="vh-md-100 p-0">
-			<Row className={`vh-md-100 m-0 ${isMobile ? "login" : ""}`}>
-				<Col md={6} className="d-none d-md-flex justify-content-center align-items-center p-0 login">
+			<Row className={`vh-md-100 m-0 ${isMobile ? "background-form" : ""}`}>
+				<Col md={6} className="d-none d-md-flex justify-content-center align-items-center p-0 background-form">
 					<Row>
 						<Col className="text-center">
 							<img src={Logo} alt="logo" width="128" className="img-fluid" />
