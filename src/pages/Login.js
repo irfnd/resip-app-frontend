@@ -29,9 +29,7 @@ export default function Login() {
 						</Col>
 					</Row>
 				</Col>
-				<Col md={6} className="bg-transparent p-0">
-					<LoginForm />
-				</Col>
+				<LoginForm />
 			</Row>
 		</Container>
 	);

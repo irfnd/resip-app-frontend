@@ -57,44 +57,36 @@ export default function LoginForm() {
 	};
 
 	return (
-		<div className="w-100 h-100 d-flex justify-content-center align-items-center px-3 px-md-0 px-lg-5">
-			<Col xs={12} sm={10} md={8} className="bg-light rounded-4 p-5 p-md-0">
-				{/* Page Title */}
-				<Row>
-					<Col className="text-center">
-						<TitlePage {...loginProps.title.titlePage} />
-					</Col>
-				</Row>
+		<Col md={6} className="">
+			<Form onSubmit={handleSubmit(onSubmit)}>
+				<Row className="vh-100 d-flex justify-content-center align-items-center m-0 ">
+					<Col xs={12} sm={8} md={12} lg={10} xl={8} className="bg-light m-0 py-5 px-5 px-md-3 rounded-4">
+						{/* Title Page */}
+						<div className="text-center">
+							<TitlePage {...loginProps.title.titlePage} />
+						</div>
 
-				{/* Login Form */}
-				<Form onSubmit={handleSubmit(onSubmit)}>
-					<Row>
-						<Col>
+						{/* Input Login */}
+						<div>
 							<Input {...loginProps.input.inputEmail} register={register} errors={errors} />
 							<Input {...loginProps.input.inputPassword} register={register} errors={errors} />
-						</Col>
-					</Row>
-					<Row className="mb-3">
-						<Col>
+						</div>
+						<div className="mb-3">
 							<CheckRadio {...loginProps.input.checkAgreeTerms} register={register} errors={errors} />
-						</Col>
-					</Row>
-					<Row className="mb-3">
-						<Col>
+						</div>
+						<div className="mb-3">
 							<ButtonBlock {...loginProps.input.submitButton} />
-						</Col>
-					</Row>
+						</div>
 
-					{/* Sign-Up for new user */}
-					<Row>
-						<Col className="text-center">
+						{/* Sign-Up for new user */}
+						<div className="text-center">
 							<p className="ts-12 fw-medium">
 								Don’t have an account? <Link to="/register">Sign Up</Link>
 							</p>
-						</Col>
-					</Row>
-				</Form>
-			</Col>
-		</div>
+						</div>
+					</Col>
+				</Row>
+			</Form>
+		</Col>
 	);
 }
