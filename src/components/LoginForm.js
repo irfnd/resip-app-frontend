@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import { Row, Col, Form } from "react-bootstrap";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 import TitlePage from "./subComponents/title/TitlePage";
 import Input from "./subComponents/input/Input";
 import ButtonBlock from "./subComponents/button/ButtonBlock";
 import CheckRadio from "./subComponents/checkRadio/CheckRadio";
+import LoginSchema from "./subComponents/validations/LoginSchema";
 
 const loginProps = {
 	title: {
@@ -44,6 +47,15 @@ const loginProps = {
 };
 
 export default function LoginForm() {
+	const { register, handleSubmit, formState } = useForm({
+		resolver: yupResolver(LoginSchema),
+	});
+	const { errors } = formState;
+
+	const onSubmit = (data) => {
+		console.log(data);
+	};
+
 	return (
 		<div className="w-100 h-100 d-flex justify-content-center align-items-center px-3 px-md-0 px-lg-5">
 			<Col xs={12} sm={10} md={8} className="bg-light rounded-4 p-5 p-md-0">
@@ -55,16 +67,16 @@ export default function LoginForm() {
 				</Row>
 
 				{/* Login Form */}
-				<Form>
+				<Form onSubmit={handleSubmit(onSubmit)}>
 					<Row>
 						<Col>
-							<Input {...loginProps.input.inputEmail} />
-							<Input {...loginProps.input.inputPassword} />
+							<Input {...loginProps.input.inputEmail} register={register} errors={errors} />
+							<Input {...loginProps.input.inputPassword} register={register} errors={errors} />
 						</Col>
 					</Row>
 					<Row className="mb-3">
 						<Col>
-							<CheckRadio {...loginProps.input.checkAgreeTerms} />
+							<CheckRadio {...loginProps.input.checkAgreeTerms} register={register} errors={errors} />
 						</Col>
 					</Row>
 					<Row className="mb-3">

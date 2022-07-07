@@ -2,8 +2,21 @@ import { PropTypes } from "prop-types";
 import { Form } from "react-bootstrap";
 
 export default function CheckRadio(props) {
-	const { id, name, type, className, label, isDisabled } = props;
-	return <Form.Check id={id} name={name} type={type} className={className} label={label} disabled={isDisabled} />;
+	const { id, name, type, className, label, isDisabled, register, errors } = props;
+	return (
+		<Form.Check
+			id={id}
+			name={name}
+			type={type}
+			className={className}
+			label={label}
+			disabled={isDisabled}
+			{...register(name)}
+			isInvalid={!!errors[name]}
+			feedback={errors[name] && errors[name].message}
+			feedbackType="invalid"
+		/>
+	);
 }
 
 CheckRadio.propTypes = {
@@ -13,6 +26,8 @@ CheckRadio.propTypes = {
 	className: PropTypes.string,
 	label: PropTypes.string,
 	isDisabled: PropTypes.bool,
+	register: PropTypes.func,
+	errors: PropTypes.object,
 };
 
 CheckRadio.defaultProps = {
@@ -22,4 +37,6 @@ CheckRadio.defaultProps = {
 	className: "fw-medium",
 	label: "My CheckRadio",
 	isDisabled: false,
+	register: null,
+	errors: null,
 };
