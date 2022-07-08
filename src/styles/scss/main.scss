@@ -149,9 +149,14 @@ $form-validation-states: (
 
 .bg-glass {
 	background: rgba(255, 255, 255, 0);
-	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 2px 30px rgba(0, 0, 0, 0.1);
 	backdrop-filter: blur(15px);
 	-webkit-backdrop-filter: blur(15px);
+}
+
+// Section-1
+.section-1 {
+	padding-top: 120px;
 }
 
 // Custom Background Accent
@@ -176,5 +181,7 @@ $form-validation-states: (
 	border-left: $primary solid 10px;
 	padding-left: 20px;
 }
+
+// Custom Footer
 
 @import "../../../node_modules/bootstrap/scss/bootstrap";
