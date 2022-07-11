@@ -1,6 +1,4 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Container, Navbar, Button, Nav, NavDropdown, Image, Row, Col } from "react-bootstrap";
+import { Container, Figure, Button, Image, Row, Col } from "react-bootstrap";
 import { FiSearch } from "react-icons/fi";
 
 import img1 from "../images/homepage-img-1.jpg";
@@ -8,75 +6,14 @@ import img2 from "../images/new-recipe-1.jpg";
 
 import recipe1 from "../images/recipes/recipe-1.jpg";
 
-function ImageProfile() {
-	return (
-		<Image
-			roundedCircle
-			src="https://garverins.com/wp-content/uploads/user.png"
-			width={35}
-			className="border border-success"
-		/>
-	);
-}
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 export default function Home() {
-	const [login] = useState(false);
-
 	return (
 		<>
 			{/* Navbar */}
-			<Navbar collapseOnSelect expand="lg" fixed="top" className="bg-glass py-4">
-				<Container>
-					<Navbar.Toggle aria-controls="responsive-navbar-nav" />
-					<Nav className="d-flex flex-row align-items-center order-lg-2">
-						{!login && (
-							<>
-								<li className="me-2 fw-bold">
-									<Link to="/login">
-										<Button variant="primary" className="text-light p-2 px-4">
-											Log In
-										</Button>
-									</Link>
-								</li>
-								<li>
-									<Link to="/register">
-										<Button variant="warning" className="p-2 px-4">
-											Sign Up
-										</Button>
-									</Link>
-								</li>
-							</>
-						)}
-					</Nav>
-					{login && (
-						<NavDropdown title={<ImageProfile />} align="end" className="order-lg-2 py-1">
-							<NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item>
-							<NavDropdown.Item href="#action/3.2">My Recipes</NavDropdown.Item>
-							<NavDropdown.Divider />
-							<NavDropdown.Item href="#action/3.4">Log Out</NavDropdown.Item>
-						</NavDropdown>
-					)}
-					<Navbar.Collapse id="responsive-navbar-nav">
-						<Nav className="me-auto pt-4 ps-4 p-lg-0 gap-3 gap-lg-5">
-							<li className="active-nav" active>
-								<Link to="/" className="text-dark fw-bold">
-									Home
-								</Link>
-							</li>
-							<li className="" active={false}>
-								<Link to="/" className="text-dark fw-bold">
-									Add Recipe
-								</Link>
-							</li>
-							<li className="" active={false}>
-								<Link to="/" className="text-dark fw-bold">
-									Profile
-								</Link>
-							</li>
-						</Nav>
-					</Navbar.Collapse>
-				</Container>
-			</Navbar>
+			<Navbar isLogin />
 
 			{/* Homepage Content */}
 			<Container>
@@ -98,6 +35,7 @@ export default function Home() {
 								</Row>
 							</Col>
 							<Col xs={12} md={6}>
+								<div className="bg-primary background-accent-1"> </div>
 								<Row className="h-100 d-flex align-items-center justify-content-end">
 									<Col lg={10}>
 										<Image src={img1} fluid alt="..." rounded />
@@ -111,6 +49,7 @@ export default function Home() {
 					<Col>
 						<Row className="py-5">
 							<Col xs={12} md={6} className="mb-5 m-md-0">
+								<div className="bg-primary background-accent-2"> </div>
 								<Row className="h-100 d-flex align-items-center">
 									<Col lg={10}>
 										<p className="ts-30 fw-medium tag mb-5">New Recipe</p>
@@ -141,29 +80,45 @@ export default function Home() {
 							<Col sm={12} md={12} lg={12}>
 								<p className="ts-30 fw-medium tag mb-5">Latest Recipe</p>
 							</Col>
-							<Col className="my-3">
-								<Image src={recipe1} fluid alt="..." rounded />
+							<Col className="mb-4">
+								<Figure className="recipe-photo m-0">
+									<Figure.Image className="m-0" src={recipe1} alt="..." rounded fluid />
+									<div className="recipe-title">
+										<h5 className="ms-3 mb-3 fw-medium w-50">Bomb Chicken</h5>
+									</div>
+								</Figure>
 							</Col>
-							<Col className="my-3">
-								<Image src={recipe1} fluid alt="..." rounded />
+							<Col className="mb-4">
+								<Figure className="recipe-photo m-0">
+									<Figure.Image className="m-0" src={recipe1} alt="..." rounded fluid />
+									<div className="recipe-title">
+										<h5 className="ms-3 mb-3 fw-medium w-50">Bomb Chicken</h5>
+									</div>
+								</Figure>
 							</Col>
-							<Col className="my-3">
-								<Image src={recipe1} fluid alt="..." rounded />
+							<Col className="mb-4">
+								<Figure className="recipe-photo m-0">
+									<Figure.Image className="m-0" src={recipe1} alt="..." rounded fluid />
+									<div className="recipe-title">
+										<h5 className="ms-3 mb-3 fw-medium w-50">Bomb Chicken</h5>
+									</div>
+								</Figure>
 							</Col>
-							<Col className="my-3">
-								<Image src={recipe1} fluid alt="..." rounded />
+							<Col className="mb-4">
+								<Figure className="recipe-photo m-0">
+									<Figure.Image className="m-0" src={recipe1} alt="..." rounded fluid />
+									<div className="recipe-title">
+										<h5 className="ms-3 mb-3 fw-medium w-50">Bomb Chicken</h5>
+									</div>
+								</Figure>
 							</Col>
-							<Col className="my-3">
-								<Image src={recipe1} fluid alt="..." rounded />
-							</Col>
-							<Col className="my-3">
-								<Image src={recipe1} fluid alt="..." rounded />
-							</Col>
-							<Col className="my-3">
-								<Image src={recipe1} fluid alt="..." rounded />
-							</Col>
-							<Col className="my-3">
-								<Image src={recipe1} fluid alt="..." rounded />
+							<Col className="mb-4">
+								<Figure className="recipe-photo m-0">
+									<Figure.Image className="m-0" src={recipe1} alt="..." rounded fluid />
+									<div className="recipe-title">
+										<h5 className="ms-3 mb-3 fw-medium w-50">Bomb Chicken</h5>
+									</div>
+								</Figure>
 							</Col>
 						</Row>
 					</Col>
@@ -171,36 +126,7 @@ export default function Home() {
 			</Container>
 
 			{/* Footer */}
-			<Row className="bg-primary mt-5 py-5 d-flex justify-content-center align-items-center w-100 m-0">
-				<Col md={12} className="text-center my-5">
-					<p className="display-3 fw-medium mb-4 text-light">Eat, Cook, Repeat</p>
-					<p className="ts-20 text-light">Share your best recipe by uploading here !</p>
-				</Col>
-				<Col md={12} className="mt-5">
-					<Nav className="justify-content-center bg-primary w-100">
-						<Nav.Item>
-							<Nav.Link href="/home" className="text-light">
-								Product
-							</Nav.Link>
-						</Nav.Item>
-						<Nav.Item>
-							<Nav.Link href="/home" className="text-light">
-								Company
-							</Nav.Link>
-						</Nav.Item>
-						<Nav.Item>
-							<Nav.Link href="/home" className="text-light">
-								Learn More
-							</Nav.Link>
-						</Nav.Item>
-						<Nav.Item>
-							<Nav.Link href="/home" className="text-light">
-								Get in Touch
-							</Nav.Link>
-						</Nav.Item>
-					</Nav>
-				</Col>
-			</Row>
+			<Footer />
 		</>
 	);
 }

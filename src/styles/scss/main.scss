@@ -25,6 +25,11 @@ $font-weight-black: 900;
 	font-size: 40px;
 }
 
+// Custom Text Justify
+.text-justify {
+	text-align: justify;
+}
+
 // Custom Text-Size
 .ts-10 {
 	font-size: 10px;
@@ -113,6 +118,15 @@ $form-check-label-cursor: pointer;
 $form-check-label-color: $secondary;
 $form-check-input-focus-border: $input-focus-border-color;
 
+// Custom Tabs
+$nav-tabs-border-color: null;
+$nav-tabs-border-width: null;
+$nav-tabs-border-radius: null;
+$nav-tabs-link-hover-border-color: null;
+$nav-tabs-link-active-color: $dark;
+$nav-tabs-link-active-bg: null;
+$nav-tabs-link-active-border-color: null;
+
 // Custom Form Validation
 @import "../../../node_modules/bootstrap/scss/functions";
 @import "../../../node_modules/bootstrap/scss/variables";
@@ -160,20 +174,70 @@ $form-validation-states: (
 }
 
 // Custom Background Accent
+@import "../../../node_modules/bootstrap/scss/mixins";
+
 .background-accent-1 {
 	z-index: -5;
 	position: absolute;
 	right: 0;
-	width: 25%;
-	height: 900px;
+	width: 50%;
+	top: 340px;
+	height: 500px;
+
+	@include media-breakpoint-up(sm) {
+		width: 50%;
+		top: 350px;
+		height: 500px;
+	}
+
+	@include media-breakpoint-up(md) {
+		width: 25%;
+		top: 0;
+		height: 550px;
+	}
+
+	@include media-breakpoint-up(lg) {
+		width: 25%;
+		height: 650px;
+	}
+
+	@include media-breakpoint-up(xl) {
+		width: 25%;
+		height: 800px;
+	}
 }
 
 .background-accent-2 {
 	z-index: -5;
 	position: absolute;
-	width: 20%;
-	height: 480px;
-	margin-top: 170px;
+	top: 1030px;
+	left: 0;
+	width: 50%;
+	height: 400px;
+
+	@include media-breakpoint-up(sm) {
+		top: 1100px;
+		width: 50%;
+		height: 480px;
+	}
+
+	@include media-breakpoint-up(md) {
+		top: 690px;
+		width: 25%;
+		height: 300px;
+	}
+
+	@include media-breakpoint-up(lg) {
+		top: 720px;
+		width: 25%;
+		height: 300px;
+	}
+
+	@include media-breakpoint-up(xl) {
+		top: 880px;
+		width: 25%;
+		height: 480px;
+	}
 }
 
 // Custom Tag Homepage
@@ -182,6 +246,33 @@ $form-validation-states: (
 	padding-left: 20px;
 }
 
-// Custom Footer
+// Custom Recipe
+.recipe-photo {
+	position: relative;
+}
+
+.recipe-title {
+	position: absolute;
+	bottom: 0;
+}
+
+// Custom Detail Recipe
+.recipe-detail-photo {
+	height: 28rem;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+// Custom Profile Page
+.profile-photo {
+	position: relative;
+}
+
+.profile-edit {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
 
 @import "../../../node_modules/bootstrap/scss/bootstrap";
