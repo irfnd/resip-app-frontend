@@ -12,7 +12,7 @@ export default function DetailRecipe() {
 	console.log(recipeId);
 	return (
 		<>
-			<Navbar isLogin={false} />
+			<Navbar />
 
 			<Container>
 				<Row className="d-flex flex-column">

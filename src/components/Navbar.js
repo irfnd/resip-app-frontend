@@ -1,11 +1,26 @@
-import { PropTypes } from "prop-types";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+
+// Import Styles + Icons
 import { Container, Navbar as Nb, Nav, NavDropdown, Button } from "react-bootstrap";
 
+// Import Components + Images
 import ImageProfile from "./subComponents/ImageProfile";
+import { authActions } from "../redux/slice/auth";
 
-export default function Navbar(props) {
-	const { isLogin, profilePhoto } = props;
+export default function Navbar() {
+	const [isLogin, setIslogin] = useState(false);
+	const user = useSelector((state) => state.auth.user);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		if (user) setIslogin(true);
+	}, []);
+
+	function logout() {
+		dispatch(authActions.logout());
+	}
 
 	return (
 		<Nb collapseOnSelect expand="lg" fixed="top" className="bg-glass py-4">
@@ -33,7 +48,7 @@ export default function Navbar(props) {
 				</Nav>
 				{isLogin && (
 					<NavDropdown
-						title={<ImageProfile urlPhoto={isLogin ? profilePhoto : null} />}
+						title={<ImageProfile urlPhoto={user.photo_profile} />}
 						align="end"
 						className="order-lg-2 py-1"
 					>
@@ -44,41 +59,35 @@ export default function Navbar(props) {
 							My Recipes
 						</Link>
 						<NavDropdown.Divider />
-						<Link className="dropdown-item" to="/profile">
+						<Link className="dropdown-item" to="/login" onClick={logout}>
 							Log Out
 						</Link>
 					</NavDropdown>
 				)}
 				<Nb.Collapse id="responsive-navbar-nav">
 					<Nav className="me-auto pt-4 ps-4 p-lg-0 gap-3 gap-lg-5">
-						<li className="active-nav" active>
+						<li className="active-nav">
 							<Link to="/" className="text-dark fw-bold">
 								Home
 							</Link>
 						</li>
-						<li className="" active={false}>
-							<Link to="/add" className="text-dark fw-bold">
-								Add Recipe
-							</Link>
-						</li>
-						<li className="" active={false}>
-							<Link to="/profile" className="text-dark fw-bold">
-								Profile
-							</Link>
-						</li>
+						{isLogin && (
+							<>
+								<li className="">
+									<Link to="/add" className="text-dark fw-bold">
+										Add Recipe
+									</Link>
+								</li>
+								<li className="">
+									<Link to="/profile" className="text-dark fw-bold">
+										Profile
+									</Link>
+								</li>
+							</>
+						)}
 					</Nav>
 				</Nb.Collapse>
 			</Container>
 		</Nb>
 	);
 }
-
-Navbar.propTypes = {
-	isLogin: PropTypes.bool,
-	profilePhoto: PropTypes.string,
-};
-
-Navbar.defaultProps = {
-	isLogin: false,
-	profilePhoto: "https://garverins.com/wp-content/uploads/user.png",
-};

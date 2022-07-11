@@ -1,25 +1,31 @@
+import { useSelector } from "react-redux";
+
+// Import Style + Icon
 import { Container, Row, Col, Figure, Button, Tabs, Tab } from "react-bootstrap";
 import { FiEdit3 } from "react-icons/fi";
 
+// Import Components + Image
 import Navbar from "../components/Navbar";
-
 import recipe1 from "../images/recipes/recipe-1.jpg";
+import userPlaceholder from "../images/user-placeholder.jpg";
 
 export default function Profile() {
+	const user = useSelector((state) => state.auth.user);
+
 	return (
 		<>
-			<Navbar isLogin />
+			<Navbar />
 
 			<Container>
 				<Row className="d-flex flex-column">
 					<Col className="mt-5 mb-5 pt-5">
 						<Row className="d-flex flex-column align-items-center mt-5 pt-5">
-							<Col xs={4} sm={3} md={2} lg={2} xl={1} className="mb-3">
+							<Col xs={4} sm={3} md={2} lg={2} xl={2} className="mb-3">
 								<Figure className="profile-photo m-0">
 									<Figure.Image
 										className="m-0"
-										src="https://garverins.com/wp-content/uploads/user.png"
-										alt="..."
+										src={user.photo_profile ? `http://localhost:8000${user.photo_profile}` : userPlaceholder}
+										alt={`Profile ${user.name}`}
 										fluid
 										roundedCircle
 									/>
@@ -31,7 +37,7 @@ export default function Profile() {
 								</Figure>
 							</Col>
 							<Col className="text-center">
-								<h5 className="m-0">Garneta Sharina</h5>
+								<h4 className="m-0">{user.name}</h4>
 							</Col>
 						</Row>
 					</Col>

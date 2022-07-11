@@ -1,7 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Col, Form, Row } from "react-bootstrap";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useSelector, useDispatch } from "react-redux";
+import { authActions } from "../redux/slice/auth";
 
 import TitlePage from "./subComponents/title/TitlePage";
 import Input from "./subComponents/input/Input";
@@ -33,7 +35,7 @@ const registerProps = {
 		},
 		inputPhoneNumber: {
 			id: "input-phone-number",
-			name: "phone-number",
+			name: "phone_number",
 			type: "text",
 			label: "Phone Number*",
 			placeholder: "Enter your Phone Number",
@@ -47,14 +49,14 @@ const registerProps = {
 		},
 		inputConfirmPassword: {
 			id: "input-confirm-password",
-			name: "confirm-password",
+			name: "confirm_password",
 			type: "password",
 			label: "Confirm Password",
 			placeholder: "Confirm Password",
 		},
 		checkAgreeTerms: {
 			id: "agree-terms",
-			name: "agree-terms",
+			name: "agree_terms",
 			type: "checkbox",
 			label: "I agree to terms & conditions",
 		},
@@ -68,12 +70,17 @@ const registerProps = {
 };
 
 export default function RegisterForm() {
-	const resolver = yupResolver(RegisterSchema);
-	const { register, handleSubmit, formState } = useForm({ resolver });
+	const formOptions = { resolver: yupResolver(RegisterSchema) };
+	const { register, handleSubmit, formState } = useForm(formOptions);
 	const { errors } = formState;
 
-	const onSubmit = (data) => {
-		console.log(data);
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+	const registerError = useSelector((state) => state.auth.error);
+
+	const onSubmit = async ({ name, email, phone_number, password }) => {
+		await dispatch(authActions.register({ name, email, phone_number, password }));
+		navigate("/login");
 	};
 
 	return (
@@ -106,6 +113,7 @@ export default function RegisterForm() {
 							<p className="ts-12 fw-medium">
 								Already have account? <Link to="/login">Log in Here</Link>
 							</p>
+							{registerError && <p>{registerError.message}</p>}
 						</div>
 					</Col>
 				</Row>
