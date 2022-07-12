@@ -10,17 +10,17 @@ Projek ini merupakan tugas studi kasus food recipe bagian _frontend_ **Pijar Cam
 
 ### Dependencies
 
-- @hookform/resolvers
-- @reduxjs/toolkit
-- axios
-- react
-- react-bootstrap
-- react-hook-form
-- react-icons
-- react-redux
-- react-router-dom
-- yup
-- yup-password
+- [@hookform/resolvers](https://github.com/react-hook-form/resolvers)
+- [@reduxjs/toolkit](https://github.com/reduxjs/redux-toolkit)
+- [axios](https://github.com/axios/axios)
+- [react](https://github.com/facebook/react)
+- [react-bootstrap](https://github.com/react-bootstrap/react-bootstrap)
+- [react-hook-form](https://github.com/react-hook-form/react-hook-form)
+- [react-icons](https://github.com/react-icons/react-icons)
+- [react-redux](https://github.com/reduxjs/react-redux)
+- [react-router-dom](https://github.com/remix-run/react-router)
+- [yup](https://github.com/jquense/yup)
+- [yup-password](https://github.com/knicola/yup-password)
 
 ### Dev. Dependencies
 
