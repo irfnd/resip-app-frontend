@@ -1,19 +1,30 @@
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { recipeActions, recipeSelector } from "../redux/slice/recipe";
+
 import { Container, Figure, Button, Image, Row, Col } from "react-bootstrap";
 import { FiSearch } from "react-icons/fi";
-
-import img1 from "../images/homepage-img-1.jpg";
-import img2 from "../images/new-recipe-1.jpg";
-
-import recipe1 from "../images/recipes/recipe-1.jpg";
 
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
+import img1 from "../images/homepage-img-1.jpg";
+import img2 from "../images/new-recipe-1.jpg";
+import recipePlaceholder from "../images/recipe-placeholder.png";
+
 export default function Home() {
+	const dispatch = useDispatch();
+	const recipes = useSelector((state) => recipeSelector.selectAll(state));
+
+	useEffect(() => {
+		dispatch(recipeActions.getRecipes({ page: 1, size: 8 }));
+	}, [dispatch]);
+
 	return (
 		<>
 			{/* Navbar */}
-			<Navbar isLogin />
+			<Navbar />
 
 			{/* Homepage Content */}
 			<Container>
@@ -35,7 +46,6 @@ export default function Home() {
 								</Row>
 							</Col>
 							<Col xs={12} md={6}>
-								<div className="bg-primary background-accent-1"> </div>
 								<Row className="h-100 d-flex align-items-center justify-content-end">
 									<Col lg={10}>
 										<Image src={img1} fluid alt="..." rounded />
@@ -49,7 +59,6 @@ export default function Home() {
 					<Col>
 						<Row className="py-5">
 							<Col xs={12} md={6} className="mb-5 m-md-0">
-								<div className="bg-primary background-accent-2"> </div>
 								<Row className="h-100 d-flex align-items-center">
 									<Col lg={10}>
 										<p className="ts-30 fw-medium tag mb-5">New Recipe</p>
@@ -80,46 +89,24 @@ export default function Home() {
 							<Col sm={12} md={12} lg={12}>
 								<p className="ts-30 fw-medium tag mb-5">Latest Recipe</p>
 							</Col>
-							<Col className="mb-4">
-								<Figure className="recipe-photo m-0">
-									<Figure.Image className="m-0" src={recipe1} alt="..." rounded fluid />
-									<div className="recipe-title">
-										<h5 className="ms-3 mb-3 fw-medium w-50">Bomb Chicken</h5>
-									</div>
-								</Figure>
-							</Col>
-							<Col className="mb-4">
-								<Figure className="recipe-photo m-0">
-									<Figure.Image className="m-0" src={recipe1} alt="..." rounded fluid />
-									<div className="recipe-title">
-										<h5 className="ms-3 mb-3 fw-medium w-50">Bomb Chicken</h5>
-									</div>
-								</Figure>
-							</Col>
-							<Col className="mb-4">
-								<Figure className="recipe-photo m-0">
-									<Figure.Image className="m-0" src={recipe1} alt="..." rounded fluid />
-									<div className="recipe-title">
-										<h5 className="ms-3 mb-3 fw-medium w-50">Bomb Chicken</h5>
-									</div>
-								</Figure>
-							</Col>
-							<Col className="mb-4">
-								<Figure className="recipe-photo m-0">
-									<Figure.Image className="m-0" src={recipe1} alt="..." rounded fluid />
-									<div className="recipe-title">
-										<h5 className="ms-3 mb-3 fw-medium w-50">Bomb Chicken</h5>
-									</div>
-								</Figure>
-							</Col>
-							<Col className="mb-4">
-								<Figure className="recipe-photo m-0">
-									<Figure.Image className="m-0" src={recipe1} alt="..." rounded fluid />
-									<div className="recipe-title">
-										<h5 className="ms-3 mb-3 fw-medium w-50">Bomb Chicken</h5>
-									</div>
-								</Figure>
-							</Col>
+							{recipes.map(({ id, title, photo_recipe }) => (
+								<Col className="mb-4" key={id}>
+									<Figure
+										className="recipe-photo rounded-2 m-0"
+										style={{
+											backgroundImage: `url(${
+												photo_recipe ? `http://localhost:8000${photo_recipe}` : recipePlaceholder
+											})`,
+										}}
+									>
+										<div className="recipe-title">
+											<Link to={`/recipe/${id}`}>
+												<h5 className="ms-3 mb-3 fw-bold w-75 text-dark">{title}</h5>
+											</Link>
+										</div>
+									</Figure>
+								</Col>
+							))}
 						</Row>
 					</Col>
 				</Row>

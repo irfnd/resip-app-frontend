@@ -13,12 +13,16 @@
 	},
 	"plugins": ["react", "prettier"],
 	"rules": {
+		"camelcase": "off",
 		"no-console": "off",
+		"import/order": "off",
 		"import/newline-after-import": "off",
+		"no-param-reassign": "off",
 		"prettier/prettier": "off",
 		"react/react-in-jsx-scope": "off",
 		"react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
 		"react/jsx-props-no-spreading": "off",
+		"react/jsx-no-bind": "off",
 		"react/forbid-prop-types": "off"
 	}
 }

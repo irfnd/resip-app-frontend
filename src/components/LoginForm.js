@@ -1,8 +1,12 @@
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Row, Col, Form } from "react-bootstrap";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useSelector, useDispatch } from "react-redux";
+import { authActions } from "../redux/slice/auth";
 
+// Import Components
 import TitlePage from "./subComponents/title/TitlePage";
 import Input from "./subComponents/input/Input";
 import ButtonBlock from "./subComponents/button/ButtonBlock";
@@ -47,13 +51,21 @@ const loginProps = {
 };
 
 export default function LoginForm() {
-	const { register, handleSubmit, formState } = useForm({
-		resolver: yupResolver(LoginSchema),
-	});
+	const formOptions = { resolver: yupResolver(LoginSchema) };
+	const { register, handleSubmit, formState } = useForm(formOptions);
 	const { errors } = formState;
 
-	const onSubmit = (data) => {
-		console.log(data);
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+	const authUser = useSelector((state) => state.auth.user);
+	const authError = useSelector((state) => state.auth.error);
+
+	useEffect(() => {
+		if (authUser) navigate("/");
+	}, []);
+
+	const onSubmit = ({ email, password }) => {
+		return dispatch(authActions.login({ email, password }));
 	};
 
 	return (
@@ -83,6 +95,7 @@ export default function LoginForm() {
 							<p className="ts-12 fw-medium">
 								Don’t have an account? <Link to="/register">Sign Up</Link>
 							</p>
+							{authError && <p>{authError.errors}</p>}
 						</div>
 					</Col>
 				</Row>
