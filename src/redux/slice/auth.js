@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-// import history from "../../helpers/history";
+import history from "../../helpers/history";
 const { REACT_APP_API_URL } = process.env;
 
 const createInitialState = () => {
@@ -42,6 +42,9 @@ const extraReducerLogin = () => {
 			state.status = "Success";
 			state.user = user;
 			localStorage.setItem("user", JSON.stringify(user));
+
+			const { from } = history.location.state || { from: { pathname: "/" } };
+			history.navigate(from);
 		},
 		[rejected]: (state, action) => {
 			state.status = "Failed";

@@ -4,7 +4,7 @@ export default function Footer() {
 	return (
 		<Row className="bg-primary mt-5 py-5 d-flex justify-content-center align-items-center w-100 m-0">
 			<Col md={12} className="text-center my-5">
-				<p className="display-3 fw-medium mb-4 text-light">Eat, Cook, Repeat</p>
+				<p className="display-4 fw-medium mb-4 text-light">Eat, Cook, Repeat</p>
 				<p className="ts-20 text-light">Share your best recipe by uploading here !</p>
 			</Col>
 			<Col md={12} className="mt-5">

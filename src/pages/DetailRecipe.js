@@ -18,10 +18,10 @@ export default function DetailRecipe() {
 			<Navbar />
 
 			<Container>
-				<Row className="d-flex flex-column">
+				<Row className="d-flex flex-column pt-5">
 					{/* Recipe Title */}
 					<Col className="mt-5 py-5">
-						<p className="display-5 text-center fw-medium mt-5">{recipe.title}</p>
+						<p className="ts-28 text-center fw-medium mt-5">{recipe.title}</p>
 					</Col>
 
 					{/* Recipe Photo */}
