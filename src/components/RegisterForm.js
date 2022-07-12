@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Col, Form, Row } from "react-bootstrap";
@@ -5,6 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useSelector, useDispatch } from "react-redux";
 import { authActions } from "../redux/slice/auth";
 
+// Import Components
 import TitlePage from "./subComponents/title/TitlePage";
 import Input from "./subComponents/input/Input";
 import ButtonBlock from "./subComponents/button/ButtonBlock";
@@ -76,11 +78,15 @@ export default function RegisterForm() {
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	const user = useSelector((state) => state.auth.user);
 	const registerError = useSelector((state) => state.auth.error);
 
-	const onSubmit = async ({ name, email, phone_number, password }) => {
-		await dispatch(authActions.register({ name, email, phone_number, password }));
-		navigate("/login");
+	useEffect(() => {
+		if (user) navigate("/");
+	}, []);
+
+	const onSubmit = ({ name, email, phone_number, password }) => {
+		return dispatch(authActions.register({ name, email, phone_number, password }));
 	};
 
 	return (
@@ -113,7 +119,7 @@ export default function RegisterForm() {
 							<p className="ts-12 fw-medium">
 								Already have account? <Link to="/login">Log in Here</Link>
 							</p>
-							{registerError && <p>{registerError.message}</p>}
+							{registerError && <p>{registerError.errors}</p>}
 						</div>
 					</Col>
 				</Row>

@@ -1,15 +1,18 @@
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { recipeSelector } from "../redux/slice/recipe";
 import { Container, Row, Col, ListGroup, Button, Form, Image } from "react-bootstrap";
 import { FiPlay, FiBookmark, FiThumbsUp } from "react-icons/fi";
 
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
-import img1 from "../images/homepage-img-1.jpg";
+import recipePlaceholder from "../images/recipe-placeholder.png";
 
 export default function DetailRecipe() {
 	const { recipeId } = useParams();
-	console.log(recipeId);
+	const recipe = useSelector((state) => recipeSelector.selectById(state, recipeId));
+
 	return (
 		<>
 			<Navbar />
@@ -18,7 +21,7 @@ export default function DetailRecipe() {
 				<Row className="d-flex flex-column">
 					{/* Recipe Title */}
 					<Col className="mt-5 py-5">
-						<p className="display-4 text-center fw-medium mt-5">Bomb Chicken</p>
+						<p className="display-5 text-center fw-medium mt-5">{recipe.title}</p>
 					</Col>
 
 					{/* Recipe Photo */}
@@ -27,7 +30,11 @@ export default function DetailRecipe() {
 							<Col
 								lg={8}
 								className="d-flex justify-content-end align-items-end recipe-detail-photo rounded p-3"
-								style={{ backgroundImage: `url(${img1})` }}
+								style={{
+									backgroundImage: `url(${
+										recipe.photo_recipe ? `http://localhost:8000${recipe.photo_recipe}` : recipePlaceholder
+									})`,
+								}}
 							>
 								<div className="d-flex gap-2">
 									<Button size="sm" className="p-2 rounded-3 text-light">
@@ -66,11 +73,9 @@ export default function DetailRecipe() {
 							<Col lg={8}>
 								<p className="fs-4 fw-medium">Ingredients</p>
 								<ListGroup variant="flush">
-									<ListGroup.Item>Cras justo odio</ListGroup.Item>
-									<ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-									<ListGroup.Item>Morbi leo risus</ListGroup.Item>
-									<ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
-									<ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+									{recipe.ingredients.map((el) => (
+										<ListGroup.Item>{el}</ListGroup.Item>
+									))}
 								</ListGroup>
 							</Col>
 						</Row>

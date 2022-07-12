@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Row, Col, Form } from "react-bootstrap";
@@ -56,11 +57,15 @@ export default function LoginForm() {
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	const authUser = useSelector((state) => state.auth.user);
 	const authError = useSelector((state) => state.auth.error);
 
-	const onSubmit = async ({ email, password }) => {
-		await dispatch(authActions.login({ email, password }));
-		navigate("/");
+	useEffect(() => {
+		if (authUser) navigate("/");
+	}, []);
+
+	const onSubmit = ({ email, password }) => {
+		return dispatch(authActions.login({ email, password }));
 	};
 
 	return (
@@ -90,7 +95,7 @@ export default function LoginForm() {
 							<p className="ts-12 fw-medium">
 								Don’t have an account? <Link to="/register">Sign Up</Link>
 							</p>
-							{authError && <p>{authError.message}</p>}
+							{authError && <p>{authError.errors}</p>}
 						</div>
 					</Col>
 				</Row>

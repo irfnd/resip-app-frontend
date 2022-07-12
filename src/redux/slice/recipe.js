@@ -17,7 +17,6 @@ const extraActions = {
 		});
 		return res.data.results;
 	}),
-
 	getMyRecipes: createAsyncThunk("recipe/getMyRecipes", async ({ token }) => {
 		const res = await axios.get(`${REACT_APP_API_URL}/my-recipes`, {
 			headers: { Authorization: `Bearer ${token}` },
@@ -32,10 +31,10 @@ const extraReducers = () => {
 		[getRecipes.fulfilled]: (state, action) => {
 			recipeEntity.setAll(state, action.payload);
 		},
-		[addRecipe.fulfilled]: (state, action) => {
-			recipeEntity.addOne(state, action.payload);
-		},
 		[getMyRecipes.fulfilled]: (state, action) => {
+			recipeEntity.setAll(state, action.payload);
+		},
+		[addRecipe.fulfilled]: (state, action) => {
 			recipeEntity.setAll(state, action.payload);
 		},
 	};

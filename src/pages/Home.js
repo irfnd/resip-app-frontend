@@ -15,7 +15,7 @@ import recipePlaceholder from "../images/recipe-placeholder.png";
 
 export default function Home() {
 	const dispatch = useDispatch();
-	const recipes = useSelector(recipeSelector.selectAll);
+	const recipes = useSelector((state) => recipeSelector.selectAll(state));
 
 	useEffect(() => {
 		dispatch(recipeActions.getRecipes({ page: 1, size: 8 }));
@@ -46,7 +46,6 @@ export default function Home() {
 								</Row>
 							</Col>
 							<Col xs={12} md={6}>
-								<div className="bg-primary background-accent-1"> </div>
 								<Row className="h-100 d-flex align-items-center justify-content-end">
 									<Col lg={10}>
 										<Image src={img1} fluid alt="..." rounded />
@@ -60,7 +59,6 @@ export default function Home() {
 					<Col>
 						<Row className="py-5">
 							<Col xs={12} md={6} className="mb-5 m-md-0">
-								<div className="bg-primary background-accent-2"> </div>
 								<Row className="h-100 d-flex align-items-center">
 									<Col lg={10}>
 										<p className="ts-30 fw-medium tag mb-5">New Recipe</p>

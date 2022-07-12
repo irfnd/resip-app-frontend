@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import history from "../../helpers/history";
+// import history from "../../helpers/history";
 const { REACT_APP_API_URL } = process.env;
 
 const createInitialState = () => {
@@ -12,13 +12,21 @@ const createInitialState = () => {
 };
 
 const extraActions = {
-	register: createAsyncThunk("auth/register", async (data) => {
-		const res = await axios.post(`${REACT_APP_API_URL}/auth/register`, data);
-		return res.data.results;
+	register: createAsyncThunk("auth/register", async (data, { rejectWithValue }) => {
+		try {
+			const res = await axios.post(`${REACT_APP_API_URL}/auth/register`, data);
+			return res.data.results;
+		} catch (err) {
+			return rejectWithValue(err.response);
+		}
 	}),
-	login: createAsyncThunk("auth/login", async (data) => {
-		const res = await axios.post(`${REACT_APP_API_URL}/auth/login`, data);
-		return res.data.results;
+	login: createAsyncThunk("auth/login", async (data, { rejectWithValue }) => {
+		try {
+			const res = await axios.post(`${REACT_APP_API_URL}/auth/login`, data);
+			return res.data.results;
+		} catch (err) {
+			return rejectWithValue(err.response);
+		}
 	}),
 };
 
@@ -34,13 +42,10 @@ const extraReducerLogin = () => {
 			state.status = "Success";
 			state.user = user;
 			localStorage.setItem("user", JSON.stringify(user));
-
-			const { from } = history.location.state || { from: { pathname: "/" } };
-			history.navigate(from);
 		},
 		[rejected]: (state, action) => {
 			state.status = "Failed";
-			state.error = action.error;
+			state.error = action.payload.data;
 		},
 	};
 };
@@ -58,7 +63,7 @@ const extraReducerRegister = () => {
 		},
 		[rejected]: (state, action) => {
 			state.status = "Failed";
-			state.error = action.error;
+			state.error = action.payload.data;
 		},
 	};
 };
