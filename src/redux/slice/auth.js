@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import history from "../../helpers/history";
+const { API_URL } = process.env;
 
 const createInitialState = () => {
 	return {
@@ -12,11 +13,11 @@ const createInitialState = () => {
 
 const extraActions = {
 	register: createAsyncThunk("auth/register", async (data) => {
-		const res = await axios.post("http://localhost:8000/auth/register", data);
+		const res = await axios.post(`${API_URL}/auth/register`, data);
 		return res.data.results;
 	}),
 	login: createAsyncThunk("auth/login", async (data) => {
-		const res = await axios.post("http://localhost:8000/auth/login", data);
+		const res = await axios.post(`${API_URL}/auth/login`, data);
 		return res.data.results;
 	}),
 };

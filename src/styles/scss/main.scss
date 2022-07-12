@@ -146,7 +146,7 @@ $form-validation-states: (
 
 // Custom background-image login
 .background-form {
-	background-image: linear-gradient(rgba(244, 93, 1, 0.8), rgba(244, 93, 1, 0.8)),
+	background-image: linear-gradient(rgba(240, 162, 2, 0.8), rgba(240, 162, 2, 0.8)),
 		url("../../images/background-login.jpg");
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -248,7 +248,12 @@ $form-validation-states: (
 
 // Custom Recipe
 .recipe-photo {
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
 	position: relative;
+	width: 100%;
+	height: 280px;
 }
 
 .recipe-title {
