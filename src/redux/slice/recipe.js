@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, createEntityAdapter } from "@reduxjs/toolkit";
 import axios from "axios";
-const { API_URL } = process.env;
+const { REACT_APP_API_URL } = process.env;
 
 const recipeEntity = createEntityAdapter({
 	selectId: (recipe) => recipe.id,
@@ -8,18 +8,18 @@ const recipeEntity = createEntityAdapter({
 
 const extraActions = {
 	getRecipes: createAsyncThunk("recipe/getRecipes", async ({ page, size }) => {
-		const res = await axios.get(`${API_URL}/recipes`, { params: { page, size } });
+		const res = await axios.get(`${REACT_APP_API_URL}/recipes`, { params: { page, size } });
 		return res.data.results.recipes;
 	}),
 	addRecipe: createAsyncThunk("recipe/addRecipe", async ({ formData, token }) => {
-		const res = await axios.post(`${API_URL}/recipes`, formData, {
+		const res = await axios.post(`${REACT_APP_API_URL}/recipes`, formData, {
 			headers: { Authorization: `Bearer ${token}` },
 		});
 		return res.data.results;
 	}),
 
 	getMyRecipes: createAsyncThunk("recipe/getMyRecipes", async ({ token }) => {
-		const res = await axios.get(`${API_URL}/my-recipes`, {
+		const res = await axios.get(`${REACT_APP_API_URL}/my-recipes`, {
 			headers: { Authorization: `Bearer ${token}` },
 		});
 		return res.data.results.recipes;

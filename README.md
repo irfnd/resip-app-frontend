@@ -35,10 +35,10 @@ Desain Frontend: [Desain Aplikasi](https://www.figma.com/file/SUbBTYCq1e4ngRt20l
 - [x] Navigation (Public & Private)
 - [x] Login dan register (page)
 - [x] localStorage
-- [ ] Redux (CRUD) & with file
-- [x] URL Params (Search, Sort dan Pagination)
+- [x] Redux (CRUD) & with file
+- [ ] URL Params (Search, Sort dan Pagination)
 - [ ] Build & deploy
-- [ ] ENV
+- [x] ENV
 - [x] Responsive
 - [x] Linter
 - [x] Hooks
